@@ -68,6 +68,8 @@ class Prince
     pdf = IO.popen(path, "w+")
     pdf.puts(string)
     pdf.close_write
-    pdf.gets(nil)
+    result = pdf.gets(nil)
+    pdf.close_read
+    return result
   end
 end
