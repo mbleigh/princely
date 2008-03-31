@@ -7,9 +7,9 @@ module PdfHelper
     end
   end
   
-  def render_with_princely(options = nil, &block)
+  def render_with_princely(options = nil, *args, &block)
     if options.nil? or options[:pdf].nil?
-      render_without_princely(options, &block)
+      render_without_princely(options, *args, &block)
     else
       options[:name] ||= options.delete(:pdf)
       make_and_send_pdf(options.delete(:name), options)
