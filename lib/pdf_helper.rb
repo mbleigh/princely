@@ -26,14 +26,16 @@ module PdfHelper
     prince = Prince.new()
     # Sets style sheets on PDF renderer
     prince.add_style_sheets(*options[:stylesheets].collect{|style| stylesheet_file_path(style)})
-    # Render the estimate to a big html string.
-    # Set RAILS_ASSET_ID to blank string or rails appends some time after
-    # to prevent file caching, fucking up local - disk requests.
-    ENV["RAILS_ASSET_ID"] = ''
+    
     html_string = render_to_string(:template => options[:template], :layout => options[:layout])
+    
     # Make all paths relative, on disk paths...
     html_string.gsub!(".com:/",".com/") # strip out bad attachment_fu URLs
     html_string.gsub!("src=\"/","src=\"#{RAILS_ROOT}/public/") # reroute absolute paths
+    
+    # Remove asset ids on images with a regex
+    html_string.gsub!(/src="\S+\?\d*"/){|s| s.split('?').first + '"'}
+    
     # Send the generated PDF file from our html string.
     return prince.pdf_from_string(html_string)
   end
