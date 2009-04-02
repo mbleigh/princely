@@ -8,7 +8,7 @@ module PdfHelper
   end
   
   def render_with_princely(options = nil, *args, &block)
-    if options.nil? or options.is_a?(Symbol) or (options.is_a?(Hash) and options[:pdf].nil?) then
+    if options.nil? or options.is_a?(Symbol) or options.is_a?(String) or (options.is_a?(Hash) and options[:pdf].nil?) then
       render_without_princely(options, *args, &block)
     else
       options[:name] ||= options.delete(:pdf)
