@@ -8,11 +8,11 @@ module PdfHelper
   end
   
   def render_with_princely(options = nil, *args, &block)
-    if options.nil? or options.is_a?(Symbol) or options.is_a?(String) or (options.is_a?(Hash) and options[:pdf].nil?) then
-      render_without_princely(options, *args, &block)
-    else
+    if options.is_a?(Hash) && options.has_key?(:pdf)
       options[:name] ||= options.delete(:pdf)
-      make_and_send_pdf(options.delete(:name), options)
+      make_and_send_pdf(options.delete(:name), options)      
+    else
+      render_without_princely(options, *args, &block)
     end
   end  
     
