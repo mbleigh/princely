@@ -31,10 +31,10 @@ module PdfHelper
     
     # Make all paths relative, on disk paths...
     html_string.gsub!(".com:/",".com/") # strip out bad attachment_fu URLs
-    html_string.gsub!("src=\"/","src=\"#{RAILS_ROOT}/public/") # reroute absolute paths
+    html_string.gsub!( /src=["']+([^:]+?)["']/i ) { |m| "src=\"#{RAILS_ROOT}/public/" + $1 + '"' } # re-route absolute paths
     
     # Remove asset ids on images with a regex
-    html_string.gsub!(/src="\S+\?\d*"/){|s| s.split('?').first + '"'}
+    html_string.gsub!( /src=["'](\S+\?\d*)["']/i ) { |m| 'src="' + $1.split('?').first + '"' }
     
     # Send the generated PDF file from our html string.
     return prince.pdf_from_string(html_string)
