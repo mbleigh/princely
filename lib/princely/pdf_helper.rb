@@ -1,5 +1,5 @@
 module PdfHelper
-  require 'prince'
+  require 'princely'
   
   def self.included(base)
     base.class_eval do
