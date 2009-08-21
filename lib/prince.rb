@@ -17,6 +17,8 @@
 require 'logger'
 
 class Prince
+  VERSION = "1.0.0"
+  
   attr_accessor :exe_path, :style_sheets, :log_file, :logger
 
   # Initialize method
