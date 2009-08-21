@@ -1,1 +1,1 @@
-require "./lib/princely/rails"
+require File.dirname(__FILE__) + "/lib/princely/rails"
