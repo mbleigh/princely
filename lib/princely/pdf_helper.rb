@@ -23,7 +23,7 @@ module PdfHelper
     options[:layout] ||= false
     options[:template] ||= File.join(controller_path,action_name)
     
-    prince = Prince.new()
+    prince = Princely.new()
     # Sets style sheets on PDF renderer
     prince.add_style_sheets(*options[:stylesheets].collect{|style| stylesheet_file_path(style)})
     
