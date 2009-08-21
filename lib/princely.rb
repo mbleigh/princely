@@ -1,4 +1,4 @@
-# Prince XML Ruby interface. 
+# PrinceXML Ruby interface. 
 # http://www.princexml.com
 #
 # Library by Subimage Interactive - http://www.subimage.com
@@ -6,17 +6,17 @@
 #
 # USAGE
 # -----------------------------------------------------------------------------
-#   prince = Prince.new()
+#   princely = Princely.new()
 #   html_string = render_to_string(:template => 'some_document')
 #   send_data(
-#     prince.pdf_from_string(html_string),
+#     princely.pdf_from_string(html_string),
 #     :filename => 'some_document.pdf'
 #     :type => 'application/pdf'
 #   )
 #
 require 'logger'
 
-class Prince
+class Princely
   VERSION = "1.0.0"
   
   attr_accessor :exe_path, :style_sheets, :log_file, :logger
