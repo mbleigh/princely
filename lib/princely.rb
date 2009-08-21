@@ -56,7 +56,7 @@ class Princely
   # Returns PDF as a stream, so we can use send_data to shoot
   # it down the pipe using Rails.
   #
-  def pdf_from_string(string)
+  def pdf_from_string(string, output_file = '-')
     path = self.exe_path()
     # Don't spew errors to the standard out...and set up to take IO 
     # as input and output
@@ -74,5 +74,22 @@ class Princely
     result = pdf.gets(nil)
     pdf.close_read
     return result
+  end
+
+  def pdf_from_string_to_file(string, output_file)
+    path = self.exe_path()
+    # Don't spew errors to the standard out...and set up to take IO 
+    # as input and output
+    path << " --silent - -o #{output_file}"
+    
+    # Show the command used...
+    logger.info "\n\nPRINCE XML PDF COMMAND"
+    logger.info path
+    logger.info ''
+    
+    # Actually call the prince command, and pass the entire data stream back.
+    pdf = IO.popen(path, "w+")
+    pdf.puts(string)
+    pdf.close
   end
 end
