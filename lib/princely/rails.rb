@@ -1,5 +1,5 @@
-require './../princely'
-require './../pdf_helper'
+require File.dirname(__FILE__) + '/../princely'
+require 'princely/pdf_helper'
 
 Mime::Type.register 'application/pdf', :pdf
 

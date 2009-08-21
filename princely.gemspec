@@ -13,16 +13,18 @@ Gem::Specification.new do |s|
   s.description = %q{A wrapper for the PrinceXML PDF generation library based on article by Seth from Subimage Interactive at http://sublog.subimage.com/2007/05/29/html-css-to-pdf-using-ruby-on-rails}
   s.email = %q{michael@intridea.com}
   s.extra_rdoc_files = [
-    "README"
+    "README.md"
   ]
   s.files = [
-    "MIT-LICENSE",
-     "README",
+    ".gitignore",
+     "MIT-LICENSE",
+     "README.md",
      "Rakefile",
      "VERSION",
      "init.rb",
-     "lib/pdf_helper.rb",
-     "lib/prince.rb"
+     "lib/princely.rb",
+     "lib/princely/pdf_helper.rb",
+     "lib/princely/rails.rb"
   ]
   s.homepage = %q{http://github.com/drnic/princely}
   s.rdoc_options = ["--charset=UTF-8"]

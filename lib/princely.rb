@@ -14,6 +14,7 @@
 #     :type => 'application/pdf'
 #   )
 #
+$:.unshift(File.dirname(__FILE__))
 require 'logger'
 
 class Princely
