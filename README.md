@@ -45,5 +45,5 @@ The defaults for the render options are as follows:
 Resources
 =========
 
-Copyright (c) 2007 Michael Bleigh and Intridea, Inc., released under the MIT license
-Copyright (c) 2007 Seth from Subimage from http://sublog.subimage.com/2007/05/29/html-css-to-pdf-using-ruby-on-rails
+* Copyright (c) 2007 Michael Bleigh and Intridea, Inc., released under the MIT license
+* Copyright (c) 2007 Seth from Subimage from http://sublog.subimage.com/2007/05/29/html-css-to-pdf-using-ruby-on-rails
