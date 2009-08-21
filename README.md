@@ -15,36 +15,35 @@ pdf in controller respond_to blocks.
 Example
 =======
 
-class Provider::EstimatesController < Provider::BaseController
-  def show
-    respond_to do |format|
-      format.html
-      format.pdf do
-        render :pdf => "file_name", 
-               :template => "controller/action.pdf.erb", 
-               :stylesheets => ["application","prince"]
-               :layout => "pdf"
+    class Provider::EstimatesController < Provider::BaseController
+      def show
+        respond_to do |format|
+          format.html
+          format.pdf do
+            render :pdf => "file_name", 
+                   :template => "controller/action.pdf.erb", 
+                   :stylesheets => ["application","prince"]
+                   :layout => "pdf"
+          end
+        end
+      end
+  
+      def pdf
+        make_and_send_pdf("file_name")
       end
     end
-  end
-  
-  def pdf
-    make_and_send_pdf("file_name")
-  end
-end
 
 Render Defaults
 ===============
 
 The defaults for the render options are as follows:
 
-layout:      false
-template:    the template for the current controller/action
-stylesheets: none
+    layout:      false
+    template:    the template for the current controller/action
+    stylesheets: none
 
 Resources
 =========
 
-Trac: http://trac.intridea.com/trac/public/
-
 Copyright (c) 2007 Michael Bleigh and Intridea, Inc., released under the MIT license
+Copyright (c) 2007 Seth from Subimage from http://sublog.subimage.com/2007/05/29/html-css-to-pdf-using-ruby-on-rails
