@@ -27,6 +27,7 @@ class Princely
   def initialize()
     # Finds where the application lives, so we can call it.
     @exe_path = `which prince`.chomp
+    raise "Cannot find prince command-line app in $PATH" if @exe_path.length == 0
   	@style_sheets = ''
   	@log_file = "#{RAILS_ROOT}/log/prince.log"
   	@logger = RAILS_DEFAULT_LOGGER
