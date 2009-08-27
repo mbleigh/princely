@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Michael Bleigh", "Seth from Subimage Interactive"]
-  s.date = %q{2009-08-24}
+  s.date = %q{2009-08-27}
   s.description = %q{A wrapper for the PrinceXML PDF generation library based on article by Seth from Subimage Interactive at http://sublog.subimage.com/2007/05/29/html-css-to-pdf-using-ruby-on-rails}
   s.email = %q{michael@intridea.com}
   s.extra_rdoc_files = [
