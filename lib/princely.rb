@@ -18,7 +18,7 @@ $:.unshift(File.dirname(__FILE__))
 require 'logger'
 
 class Princely
-  VERSION = "1.0.0"
+  VERSION = "1.0.0" unless const_defined?("VERSION")
   
   attr_accessor :exe_path, :style_sheets, :log_file, :logger
 
