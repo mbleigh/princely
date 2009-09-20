@@ -5,20 +5,20 @@
 
 Gem::Specification.new do |s|
   s.name = %q{princely}
-  s.version = "1.2.3"
+  s.version = "1.2.4"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Michael Bleigh"]
-  s.date = %q{2009-08-27}
+  s.date = %q{2009-09-19}
   s.description = %q{A wrapper for the PrinceXML PDF generation library.}
   s.email = %q{michael@intridea.com}
   s.extra_rdoc_files = [
-    "README.md"
+    "README.rdoc"
   ]
   s.files = [
     ".gitignore",
      "MIT-LICENSE",
-     "README.md",
+     "README.rdoc",
      "Rakefile",
      "VERSION",
      "init.rb",
@@ -27,10 +27,10 @@ Gem::Specification.new do |s|
      "lib/princely/rails.rb",
      "princely.gemspec"
   ]
-  s.homepage = %q{http://github.com/drnic/princely}
+  s.homepage = %q{http://github.com/mbleigh/princely}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.3.5}
+  s.rubygems_version = %q{1.3.3}
   s.summary = %q{A simple Rails wrapper for the PrinceXML PDF generation library.}
 
   if s.respond_to? :specification_version then
