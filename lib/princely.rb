@@ -81,7 +81,7 @@ class Princely
     path = self.exe_path()
     # Don't spew errors to the standard out...and set up to take IO 
     # as input and output
-    path << " --silent - -o #{output_file} >> #{@log_file} 2>> #{@log_file}"
+    path << " --silent - -o '#{output_file}' >> '#{@log_file}' 2>> '#{@log_file}'"
     
     # Show the command used...
     logger.info "\n\nPRINCE XML PDF COMMAND"
