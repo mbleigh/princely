@@ -4,7 +4,7 @@ require 'rake'
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
-    gem.name = "yellowlab-princely"
+    gem.name = "princely"
     gem.summary = %Q{A simple Rails wrapper for the PrinceXML PDF generation library.}
     gem.description = %Q{A wrapper for the PrinceXML PDF generation library.}
     gem.email = "michael@intridea.com"
