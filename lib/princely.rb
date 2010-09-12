@@ -14,6 +14,12 @@
 #     :type => 'application/pdf'
 #   )
 #
+# http://www.princexml.com/bb/viewtopic.php?t=2927
+# Set the path for resovle absolute filenames in the initializer (--fileroot option is added in the prince 7.1)
+#   
+#   Princely.fileroot = File.join(RAILS_ROOT, 'public')
+#
+
 $:.unshift(File.dirname(__FILE__))
 require 'logger'
 
@@ -21,7 +27,10 @@ class Princely
   VERSION = "1.0.0" unless const_defined?("VERSION")
   
   attr_accessor :exe_path, :style_sheets, :log_file, :logger
-
+  
+  # specify a path that will be used to resolve absolute filenames.
+  cattr_accessor :fileroot
+  
   # Initialize method
   #
   def initialize()
@@ -48,6 +57,11 @@ class Princely
   def exe_path
     # Add any standard cmd line arguments we need to pass
     @exe_path << " --input=html --server --log=#{@log_file} "
+    
+    if available_use_fileroot_option? && @@fileroot
+      @exe_path << " --fileroot=#{@@fileroot} "
+    end
+    
     @exe_path << @style_sheets
     return @exe_path
   end
@@ -93,4 +107,14 @@ class Princely
     pdf.puts(string)
     pdf.close
   end
+  
+  def available_use_fileroot_option?
+    `prince --version` =~  /^Prince (\d+\.\d+(\.\d+)?)/
+    prince_version = $1
+    prince_version =~ /(\d+)\.(\d+)(\.\d+)?/
+    major = $1.to_i
+    minor = $2.to_i
+    major > 7 || (major == 7 && minor >= 1)
+  end
+  
 end
