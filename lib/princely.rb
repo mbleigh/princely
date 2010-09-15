@@ -31,6 +31,8 @@ class Princely
   # specify a path that will be used to resolve absolute filenames.
   cattr_accessor :fileroot
   
+  @@fileroot = File.join("#{RAILS_ROOT}", 'public') # set default value
+  
   # Initialize method
   #
   def initialize()
