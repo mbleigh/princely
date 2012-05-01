@@ -1,5 +1,7 @@
 require 'princely/pdf_helper'
 
-Mime::Type.register 'application/pdf', :pdf
+if Mime::Type.lookup_by_extension(:pdf) != 'application/pdf'
+  Mime::Type.register 'application/pdf', :pdf
+end
 
 ActionController::Base.send(:include, PdfHelper)
