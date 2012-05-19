@@ -38,6 +38,20 @@ The defaults for the render options are as follows:
     template:    the template for the current controller/action
     stylesheets: none
 
+== Working with the Rails Asset Pipeline
+
+From Rails 3.1, stylesheets are served through the Rails Asset
+Pipeline.  In order for Princely to be able to find your stylesheets in 
+development mode you must run:
+
+    rake assets:compile
+
+which will compile them into the public/assets directory.
+
+Unfortunately this means that you must recompile your assets each time you 
+make a change for princely to see your latest version.  Remember to remove
+the public/assets directory after you're done testing your PDFs.
+
 == Contributors
 
 * Gemification and more: Nic Williams
