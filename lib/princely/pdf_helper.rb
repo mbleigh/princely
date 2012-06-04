@@ -45,10 +45,12 @@ module PdfHelper
   end
 
   def make_and_send_pdf(pdf_name, options = {})
+    options[:disposition] ||= 'attachment'
     send_data(
       make_pdf(options),
       :filename => pdf_name + ".pdf",
-      :type => 'application/pdf'
+      :type => 'application/pdf',
+      :disposition => options[:disposition]
     ) 
   end
   
