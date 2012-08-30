@@ -44,13 +44,14 @@ From Rails 3.1, stylesheets are served through the Rails Asset
 Pipeline.  In order for Princely to be able to find your stylesheets in 
 development mode you must run:
 
-    rake assets:compile
+    rake assets:precompile
 
 which will compile them into the public/assets directory.
 
 Unfortunately this means that you must recompile your assets each time you 
 make a change for princely to see your latest version.  Remember to remove
-the public/assets directory after you're done testing your PDFs.
+the public/assets directory after you're done testing your PDFs
+or set config.serve_static_assets to false in your development config.
 
 == Contributors
 
