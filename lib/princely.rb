@@ -25,13 +25,24 @@ class Princely
 
   # Initialize method
   #
-  def initialize()
+  def initialize(options={})
     # Finds where the application lives, so we can call it.
-    @exe_path = `which prince`.chomp
+    @exe_path = options[:path] || `which prince`.chomp
     raise "Cannot find prince command-line app in $PATH" if @exe_path.length == 0
-  	@style_sheets = ''
-  	@log_file = "#{Rails.root}/log/prince.log"
-  	@logger = Rails.logger
+    raise "Cannot find prince command-line app at #{@exe_path}" if @exe_path && !File.executable?(@exe_path)
+    @style_sheets = ''
+    @log_file = options[:log_file]
+    @logger = options[:logger]
+  end
+
+  def logger
+    @logger ||= defined?(Rails) ? Rails.logger : StdoutLogger
+  end
+
+  def log_file
+    @log_file ||= defined?(Rails) ? 
+            Rails.root.join("log/prince.log") :
+            File.expand_path(File.dirname(__FILE__) + "/log/prince.log")
   end
   
   # Sets stylesheets...
@@ -93,5 +104,11 @@ class Princely
     pdf = IO.popen(path, "w+")
     pdf.puts(string)
     pdf.close
+  end
+
+  class StdoutLogger
+    def self.info(msg)
+      puts msg
+    end
   end
 end
