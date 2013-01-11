@@ -16,7 +16,7 @@
 #
 $:.unshift(File.dirname(__FILE__))
 require 'logger'
-require 'princely/rails'
+require 'princely/rails' if defined?(Rails)
 
 class Princely
   VERSION = "1.0.0" unless const_defined?("VERSION")
