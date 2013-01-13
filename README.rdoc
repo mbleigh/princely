@@ -17,7 +17,8 @@ respond_to blocks.
             render :pdf => "file_name", 
                    :template => "controller/action.pdf.erb",
                    :stylesheets => ["application","prince"],
-                   :layout => "pdf"
+                   :layout => "pdf",
+                   :disposition => "inline" # PDF will be sent inline, means you can load it inside an iFrame or Embed
           end
         end
       end
@@ -37,6 +38,7 @@ The defaults for the render options are as follows:
     layout:      false
     template:    the template for the current controller/action
     stylesheets: none
+    disposition: attachment (created PDF file will be sent as download)
 
 == Contributors
 
