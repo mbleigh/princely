@@ -40,15 +40,34 @@ describe Princely do
       
       prince = Princely.new
       prince.log_file.to_s.should == 'in_rails/log/prince.log'
+
+      # Unfake Rails
+      Object.send(:remove_const, :Rails)
     end
 
     it "defaults outside of Rails" do
-      # Ensure Rails is not present for this test
-      Object.send(:remove_const, :Rails) if defined?(Rails)
-
       File.stub(:dirname).and_return('outside_rails')
       prince = Princely.new
       prince.log_file.should == File.expand_path('outside_rails/log/prince.log')
     end
   end
+
+  describe "exe_path" do
+    let(:prince) { Princely.new }
+
+    before(:each) do
+      prince.stub(:log_file).and_return('/tmp/test_log')
+      prince.exe_path = "/tmp/fake"
+    end
+
+    it "appends default options" do
+      prince.exe_path.should == "/tmp/fake --input=html --server --log=/tmp/test_log "
+    end
+
+    it "adds stylesheet paths" do
+      prince.style_sheets = " -s test.css "
+      prince.exe_path.should == "/tmp/fake --input=html --server --log=/tmp/test_log  -s test.css "
+    end
+  end
+
 end
