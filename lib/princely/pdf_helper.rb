@@ -53,7 +53,15 @@ module PdfHelper
   end
   
   def stylesheet_file_path(stylesheet)
-    stylesheet = stylesheet.to_s.gsub(".css","")
-    File.join(config.stylesheets_dir, "#{stylesheet}.css")
+    if Rails.configuration.assets.compile == false
+      if ActionController::Base.asset_host
+        # asset_path returns an absolute URL using asset_host if asset_host is set
+        asset_path(stylesheet)
+      else
+        File.join(Rails.public_path, asset_path(stylesheet))
+      end
+    else
+      Rails.application.assets.find_asset(stylesheet).pathname
+    end
   end
 end
