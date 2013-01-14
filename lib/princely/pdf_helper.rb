@@ -31,7 +31,7 @@ module PdfHelper
     
     # Make all paths relative, on disk paths...
     html_string.gsub!(".com:/",".com/") # strip out bad attachment_fu URLs
-    html_string.gsub!( /src=["']+([^:]+?)["']/i ) { |m|  puts $1; "src=\"#{asset_file_path($1) || $1}\"" } # re-route absolute paths
+    html_string.gsub!( /src=["']+([^:]+?)["']/i ) { |m| "src=\"#{asset_file_path($1)}\"" } # re-route absolute paths
     
     # Remove asset ids on images with a regex
     html_string.gsub!( /src=["'](\S+\?\d*)["']/i ) { |m| 'src="' + $1.split('?').first + '"' }
@@ -55,19 +55,8 @@ module PdfHelper
   end
   
   def asset_file_path(asset)
-    # remove /asset/ in generated paths
-    asset.gsub!(/\/assets\//, "")
-    
-    if Rails.configuration.assets.compile == false
-      if ActionController::Base.asset_host
-        # asset_path returns an absolute URL using asset_host if asset_host is set
-        asset_path(asset)
-      else
-        File.join(Rails.public_path, asset_path(asset))
-      end
-    else
-      Rails.application.assets.find_asset(asset).try(:pathname)
-    end
+    # Remove /assets/ from generated names and try and find a matching asset
+    Rails.application.assets.find_asset(asset.gsub(/\/assets\//, "")).try(:pathname) || asset
   end
   alias_method :stylesheet_file_path, :asset_file_path
 end
