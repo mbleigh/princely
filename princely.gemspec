@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Michael Bleigh", "Jared Fraser"]
-  s.date = "2012-01-25"
+  s.date = "2013-01-16"
   s.description = "A wrapper for the PrinceXML PDF generation library."
   s.email = ["michael@intridea.com", "dev@jsf.io"]
   s.extra_rdoc_files = [
