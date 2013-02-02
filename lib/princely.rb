@@ -19,6 +19,7 @@ require 'princely/rails' if defined?(Rails)
 
 class Princely
   autoload :StdoutLogger, 'princely/stdout_logger'
+  autoload :AssetSupport, 'princely/asset_support'
 
   attr_accessor :exe_path, :style_sheets, :logger, :log_file
 
