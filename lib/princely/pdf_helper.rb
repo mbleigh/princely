@@ -45,8 +45,8 @@ class Princely
     end
 
     def asset_file_path(asset)
-      stylesheet = stylesheet.to_s.gsub('.css', '')
-      File.join(config.stylesheets_dir, "#{stylesheet}.css")
+      asset = asset.to_s.gsub('.css', '')
+      File.join(config.stylesheets_dir, "#{asset}.css")
     end
     alias_method :stylesheet_file_path, :asset_file_path
 
