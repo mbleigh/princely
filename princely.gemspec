@@ -1,13 +1,9 @@
 # -*- encoding: utf-8 -*-
-$:.push File.expand_path("../lib", __FILE__)
-
-require 'princely/version'
+require File.expand_path('../lib/princely/version', __FILE__)
 
 Gem::Specification.new do |s|
   s.name = "princely"
   s.version = Princely::VERSION
-
-  s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Michael Bleigh", "Jared Fraser"]
   s.date = "2013-01-16"
   s.description = "A wrapper for the PrinceXML PDF generation library."
@@ -29,14 +25,5 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
   s.rubygems_version = "1.8.11"
   s.summary = "A simple Rails wrapper for the PrinceXML PDF generation library."
-
-  if s.respond_to? :specification_version then
-    s.specification_version = 3
-
-    if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-    else
-    end
-  else
-  end
 end
 
