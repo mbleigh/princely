@@ -3,14 +3,13 @@ require File.expand_path('../lib/princely/version', __FILE__)
 
 Gem::Specification.new do |s|
   s.name = "princely"
-  s.version = Princely::VERSION
+  s.version = Princely::Version.to_s
   s.authors = ["Michael Bleigh", "Jared Fraser"]
   s.date = "2013-05-04"
   s.description = "A wrapper for the PrinceXML PDF generation library."
+  s.summary = "A simple Rails wrapper for the PrinceXML PDF generation library."
   s.email = %w[michael@intridea.com dev@jsf.io]
-  s.extra_rdoc_files = [
-    "README.rdoc"
-  ]
+  s.extra_rdoc_files = %w[README.rdoc]
   s.files = %w[
     MIT-LICENSE
     README.rdoc
@@ -23,9 +22,8 @@ Gem::Specification.new do |s|
     lib/princely/version.rb
   ]
   s.homepage = "http://github.com/mbleigh/princely"
-  s.require_paths = ["lib"]
+  s.require_paths = %w[lib]
   s.rubygems_version = "1.8.11"
-  s.summary = "A simple Rails wrapper for the PrinceXML PDF generation library."
 
   s.license = 'MIT'
 
