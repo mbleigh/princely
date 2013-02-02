@@ -3,6 +3,8 @@ require 'princely/asset_support'
 
 class Princely
   module PdfHelper
+    include AssetSupport
+
     def self.included(base)
       base.send :alias_method_chain, :render, :princely
     end
@@ -32,7 +34,7 @@ class Princely
 
       html_string = render_to_string(options.slice(:template, :layout))
 
-      html_string = localize_html_string(html_string) if options[:relative_paths]
+      html_string = localize_html_string(html_string, Rails.public_path) if options[:relative_paths]
 
       # Send the generated PDF file from our html string.
       if filename = options[:filename] || options[:file]
@@ -40,10 +42,6 @@ class Princely
       else
         prince.pdf_from_string(html_string)
       end
-    end
-
-    def localize_html_string(html_string)
-      AssetSupport.localize_html_string(html_string, Rails.public_path)
     end
 
     def asset_file_path(asset)
