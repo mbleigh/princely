@@ -6,7 +6,7 @@
 #
 # USAGE
 # -----------------------------------------------------------------------------
-#   princely = Princely.new()
+#   princely = Princely.new
 #   html_string = render_to_string(:template => 'some_document')
 #   send_data(
 #     princely.pdf_from_string(html_string),
