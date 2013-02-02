@@ -15,7 +15,9 @@ class Provider::EstimatesController < Provider::BaseController
       format.html
       format.pdf do
         render :pdf => 'file_name',
-               :template => 'controller/action.pdf.erb',
+               :template => 'controller/action',
+               :handlers => %w[erb],
+               :formats => %w[pdf],
                :stylesheets => %w[application prince],
                :layout => 'pdf',
                :disposition => 'inline', # PDF will be sent inline, means you can load it inside an iFrame or Embed
@@ -36,10 +38,11 @@ end
 
 The defaults for the render options are as follows:
 
-    layout:      false
-    template:    the template for the current controller/action
-    stylesheets: none
-    disposition: attachment (created PDF file will be sent as download)
+    layout:         false
+    template:       the template for the current controller/action
+    stylesheets:    none
+    disposition:    attachment (created PDF file will be sent as download)
+    relative_paths: true
 
 ## Contributors
 
