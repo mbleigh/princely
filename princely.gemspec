@@ -18,6 +18,7 @@ Gem::Specification.new do |s|
     "lib/princely.rb",
     "lib/princely/pdf_helper.rb",
     "lib/princely/rails.rb",
+    "lib/princely/stdout_logger.rb",
     "lib/princely/version.rb"
   ]
   s.homepage = "http://github.com/mbleigh/princely"
