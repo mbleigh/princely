@@ -9,10 +9,9 @@ Gem::Specification.new do |s|
   s.description = "A wrapper for the PrinceXML PDF generation library."
   s.summary = "A simple Rails wrapper for the PrinceXML PDF generation library."
   s.email = %w[michael@intridea.com dev@jsf.io]
-  s.extra_rdoc_files = %w[README.rdoc]
   s.files = %w[
     MIT-LICENSE
-    README.rdoc
+    README.md
     Rakefile
     lib/princely.rb
     lib/princely/asset_support.rb
