@@ -18,7 +18,8 @@ class Provider::EstimatesController < Provider::BaseController
                :template => 'controller/action.pdf.erb',
                :stylesheets => %w[application prince],
                :layout => 'pdf',
-               :disposition => 'inline' # PDF will be sent inline, means you can load it inside an iFrame or Embed
+               :disposition => 'inline', # PDF will be sent inline, means you can load it inside an iFrame or Embed
+               :relative_paths => true # Modify asset paths to make them relative. See [the AssetSupport module](/lib/princely/asset_support.rb)
       end
     end
   end
