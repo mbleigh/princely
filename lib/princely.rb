@@ -19,7 +19,6 @@ require 'princely/rails' if defined?(Rails)
 
 class Princely
   autoload :StdoutLogger, 'princely/stdout_logger'
-  autoload :AssetSupport, 'princely/asset_support'
 
   attr_accessor :exe_path, :style_sheets, :logger, :log_file
 
@@ -51,7 +50,7 @@ class Princely
   # Can pass in multiple paths for css files.
   #
   def add_style_sheets(*sheets)
-    @style_sheets += sheets.map { |sheet| " -s #{sheet} " }
+    @style_sheets << sheets.map { |sheet| " -s #{sheet} " }.join(' ')
   end
 
   # Sets arbitrary command line arguments
