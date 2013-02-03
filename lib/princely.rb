@@ -21,30 +21,9 @@ module Princely
   autoload :StdoutLogger, 'princely/stdout_logger'
   autoload :AssetSupport, 'princely/asset_support'
   autoload :PDF,          'princely/pdf'
+  autoload :Logging,      'princely/logging'
 
-  class << self
-    def logger=(path)
-      @logger = path
-    end
-
-    def logger
-      @logger ||= defined?(Rails) ? Rails.logger : StdoutLogger
-    end
-
-    def log_file
-      pathname = defined?(Rails) ? Rails.root : relative_pathname
-      @log_file ||= pathname.join 'log', 'prince.log'
-    end
-    
-    def log_file=(path)
-      @log_file = path
-    end
-
-    protected
-
-    def relative_pathname
-      Pathname.new(File.expand_path('../', __FILE__))
-    end
-
+  def self.root
+    Pathname.new(File.expand_path('../', __FILE__))
   end
 end

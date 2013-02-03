@@ -16,12 +16,12 @@ module Princely
 
     # Returns the instance logger or Princely default logger
     def logger
-      @logger || Princely.logger
+      @logger || Princely::Logging.logger
     end
 
     # Returns the instance log file or Princely default log file
     def log_file
-      @log_file || Princely.log_file
+      @log_file || Princely::Logging.filename
     end
 
     # Sets stylesheets...
