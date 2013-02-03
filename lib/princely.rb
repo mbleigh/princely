@@ -37,5 +37,11 @@ module Princely
     def root
       Pathname.new(File.expand_path('../', __FILE__))
     end
+
+  protected
+  
+    def ruby_platform
+      RUBY_PLATFORM
+    end
   end
 end
