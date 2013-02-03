@@ -28,7 +28,7 @@ module Princely
     # Can pass in multiple paths for css files.
     #
     def add_style_sheets(*sheets)
-      @style_sheets += sheets.map { |sheet| " -s #{sheet} " }
+      @style_sheets << sheets.map { |sheet| " -s #{sheet} " }.join(' ')
     end
 
     # Returns fully formed executable path with any command line switches
