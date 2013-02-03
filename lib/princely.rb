@@ -23,13 +23,8 @@ module Princely
   autoload :PDF,          'princely/pdf'
   autoload :Logging,      'princely/logging'
 
-  def self.root
-    Pathname.new(File.expand_path('../', __FILE__))
-  end
-
   class << self
     attr_accessor :executable
-
 
     def executable
       @executable ||= if ruby_platform =~ /mswin32/
@@ -37,6 +32,10 @@ module Princely
       else
         `which prince`.chomp
       end
+    end
+
+    def root
+      Pathname.new(File.expand_path('../', __FILE__))
     end
   end
 end
