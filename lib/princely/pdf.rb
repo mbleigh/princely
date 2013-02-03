@@ -1,5 +1,5 @@
 module Princely
-  class PDF
+  class Pdf
     attr_accessor :exe_path, :style_sheets, :logger, :log_file
 
     # Initialize method

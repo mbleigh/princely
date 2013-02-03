@@ -28,7 +28,7 @@ module Princely
         :relative_paths => true
       }.merge(options)
 
-      prince = Princely::PDF.new
+      prince = Princely::Pdf.new
       # Sets style sheets on PDF renderer
       prince.add_style_sheets(*options[:stylesheets].collect{|style| asset_file_path(style)})
 
