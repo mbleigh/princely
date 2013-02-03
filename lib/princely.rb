@@ -24,14 +24,16 @@ module Princely
   autoload :Logging,      'princely/logging'
 
   class << self
-    attr_accessor :executable
-
     def executable
-      @executable ||= if ruby_platform =~ /mswin32/
+      @custom_executable || if ruby_platform =~ /mswin32/
         "C:/Program Files/Prince/Engine/bin/prince"
       else
         `which prince`.chomp
       end
+    end
+
+    def executable=(custom_executable)
+      @custom_executable = custom_executable
     end
 
     def root
