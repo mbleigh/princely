@@ -15,7 +15,6 @@ Gem::Specification.new do |s|
     "MIT-LICENSE",
     "README.rdoc",
     "Rakefile",
-    "VERSION",
     "lib/princely.rb",
     "lib/princely/pdf_helper.rb",
     "lib/princely/rails.rb",
