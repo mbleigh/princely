@@ -6,7 +6,7 @@ module Princely
     #
     def initialize(options={})
       # Finds where the application lives, so we can call it.
-      @exe_path = options[:path] || find_prince_executable
+      @exe_path = options[:path] || Princely.executable
       raise "Cannot find prince command-line app in $PATH" if @exe_path.length == 0
       raise "Cannot find prince command-line app at #{@exe_path}" if @exe_path && !File.executable?(@exe_path)
       @style_sheets = ''
@@ -76,14 +76,6 @@ module Princely
       pdf = IO.popen(path, "w+")
       pdf.puts string
       pdf
-    end
-
-    def find_prince_executable
-      if ruby_platform =~ /mswin32/
-        "C:/Program Files/Prince/Engine/bin/prince"
-      else
-        `which prince`.chomp
-      end
     end
 
     def log_command(path)
