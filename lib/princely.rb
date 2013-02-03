@@ -26,4 +26,17 @@ module Princely
   def self.root
     Pathname.new(File.expand_path('../', __FILE__))
   end
+
+  class << self
+    attr_accessor :executable
+
+
+    def executable
+      @executable ||= if ruby_platform =~ /mswin32/
+        "C:/Program Files/Prince/Engine/bin/prince"
+      else
+        `which prince`.chomp
+      end
+    end
+  end
 end
