@@ -43,6 +43,7 @@ The defaults for the render options are as follows:
     stylesheets:    none
     disposition:    attachment (created PDF file will be sent as download)
     relative_paths: true
+    server_flag:    true
 
 ## Contributors
 
