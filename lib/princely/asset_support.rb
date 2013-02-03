@@ -1,4 +1,4 @@
-class Princely
+module Princely
   module AssetSupport
     def localize_html_string(html_string, asset_path = nil)
       # Make all paths relative, on disk paths...

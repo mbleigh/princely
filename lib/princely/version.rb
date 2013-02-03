@@ -1,4 +1,4 @@
-class Princely
+module Princely
   class Version
     class << self
       def version
