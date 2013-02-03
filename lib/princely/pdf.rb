@@ -83,9 +83,5 @@ module Princely
       logger.info path
       logger.info ''
     end
-
-    def ruby_platform
-      RUBY_PLATFORM
-    end
   end
 end
