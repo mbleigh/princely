@@ -23,6 +23,10 @@ module Princely
   autoload :PDF,          'princely/pdf'
 
   class << self
+    def logger=(path)
+      @logger = path
+    end
+
     def logger
       @logger ||= defined?(Rails) ? Rails.logger : StdoutLogger
     end
@@ -30,6 +34,10 @@ module Princely
     def log_file
       pathname = defined?(Rails) ? Rails.root : relative_pathname
       @log_file ||= pathname.join 'log', 'prince.log'
+    end
+    
+    def log_file=(path)
+      @log_file = path
     end
 
     protected
