@@ -1,7 +1,7 @@
 require 'princely'
 require 'princely/asset_support'
 
-class Princely
+module Princely
   module PdfHelper
     include AssetSupport
 
@@ -28,7 +28,7 @@ class Princely
         :relative_paths => true
       }.merge(options)
 
-      prince = Princely.new
+      prince = Princely::PDF.new
       # Sets style sheets on PDF renderer
       prince.add_style_sheets(*options[:stylesheets].collect{|style| asset_file_path(style)})
 
