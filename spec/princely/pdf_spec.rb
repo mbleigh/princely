@@ -35,6 +35,7 @@ describe Princely::PDF do
 
   describe "log_file" do
     it "defaults in Rails" do
+      Princely.log_file = nil
       # Fake Rails for this test.
       Rails = double(:root => Pathname.new('in_rails'), :logger => nil)
 
@@ -46,8 +47,10 @@ describe Princely::PDF do
     end
 
     it "defaults outside of Rails" do
+      Princely.log_file = nil
+      
       outside_rails = Pathname.new('outside_rails')
-      Princely.any_instance.should_receive(:relative_pathname).and_return(outside_rails)
+      Princely.should_receive(:relative_pathname).and_return(outside_rails)
       prince = Princely::PDF.new
       prince.log_file.should == outside_rails.join('log/prince.log')
     end
