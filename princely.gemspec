@@ -15,6 +15,8 @@ Gem::Specification.new do |s|
     Rakefile
     lib/princely.rb
     lib/princely/asset_support.rb
+    lib/princely/logging.rb
+    lib/princely/pdf.rb
     lib/princely/pdf_helper.rb
     lib/princely/rails.rb
     lib/princely/stdout_logger.rb
