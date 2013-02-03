@@ -20,7 +20,7 @@ require 'princely/rails' if defined?(Rails)
 module Princely
   autoload :StdoutLogger, 'princely/stdout_logger'
   autoload :AssetSupport, 'princely/asset_support'
-  autoload :PDF,          'princely/pdf'
+  autoload :Pdf,          'princely/pdf'
   autoload :Logging,      'princely/logging'
 
   class << self
@@ -39,7 +39,7 @@ module Princely
     end
 
   protected
-  
+
     def ruby_platform
       RUBY_PLATFORM
     end
