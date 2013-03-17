@@ -3,7 +3,6 @@ require 'princely/asset_support'
 
 module Princely
   module PdfHelper
-    include AssetSupport
 
     def self.included(base)
       base.send :alias_method_chain, :render, :princely
