@@ -25,5 +25,7 @@ Gem::Specification.new do |s|
   s.homepage = "http://github.com/mbleigh/princely"
   s.require_paths = %w[lib]
   s.rubygems_version = "1.8.11"
+
+  s.add_development_dependency("rspec")
 end
 
