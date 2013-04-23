@@ -25,7 +25,7 @@ module Princely
 
   class << self
     def executable
-      @custom_executable || if ruby_platform =~ /mswin32/
+      @custom_executable || if ruby_platform =~ /mswin32|minigw32/
         "C:/Program Files/Prince/Engine/bin/prince"
       else
         `which prince`.chomp
