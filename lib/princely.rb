@@ -28,6 +28,7 @@ class Princely
     raise "Cannot find prince command-line app in $PATH" if @exe_path.length == 0
     raise "Cannot find prince command-line app at #{@exe_path}" if @exe_path && !File.executable?(@exe_path)
     @style_sheets = ''
+    @cmd_args = ''
     @log_file = options[:log_file]
     @logger = options[:logger]
   end
@@ -63,12 +64,18 @@ class Princely
     end
   end
 
+  # Sets arbitrary command line arguments
+  def add_cmd_args(str)
+    @cmd_args << " #{str} "
+  end
+
   # Returns fully formed executable path with any command line switches
   # we've set based on our variables.
   #
   def exe_path
     # Add any standard cmd line arguments we need to pass
     @exe_path << " --input=html --server --log=#{log_file} "
+    @exe_path << @cmd_args
     @exe_path << @style_sheets
     return @exe_path
   end
