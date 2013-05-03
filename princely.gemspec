@@ -24,5 +24,8 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
   s.rubygems_version = "1.8.11"
   s.summary = "A simple Rails wrapper for the PrinceXML PDF generation library."
+
+  s.add_development_dependency('rspec')
+  s.add_development_dependency('rake')
 end
 
