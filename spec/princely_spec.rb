@@ -68,6 +68,12 @@ describe Princely do
       prince.style_sheets = " -s test.css "
       prince.exe_path.should == "/tmp/fake --input=html --server --log=/tmp/test_log  -s test.css "
     end
+
+    it "adds arbitrary command line args" do
+      prince.add_cmd_args "--fileroot=/some/root/path"
+
+      prince.exe_path.should == "/tmp/fake --input=html --server --log=/tmp/test_log  --fileroot=/some/root/path "
+    end
   end
 
   describe "find_prince_executable" do
