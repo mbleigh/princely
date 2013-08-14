@@ -156,6 +156,8 @@ class Princely
         # just trap the error
       end
     end
+
+    raise TimeoutError.new("PrinceXML pdf generation exceeeded #{@timeout_seconds} seconds and was killed")
   end
 
   def get_children(parent_pid)
@@ -185,4 +187,6 @@ class Princely
       puts msg
     end
   end
+
+  class TimeoutError < StandardError; end
 end
