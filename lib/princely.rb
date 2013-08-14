@@ -16,8 +16,19 @@
 #
 require 'logger'
 require 'princely/rails' if defined?(Rails)
+require 'timeout'
 
 class Princely
+  # The position of each field in ps output
+  IDX_MAP = {
+    :pid => 0,
+    :ppid => 1,
+    :pcpu => 2,
+    :rss => 3,
+    :etime => 4
+  }
+
+
   attr_accessor :exe_path, :style_sheets, :log_file, :logger
 
   # Initialize method
@@ -31,6 +42,7 @@ class Princely
     @cmd_args = ''
     @log_file = options[:log_file]
     @logger = options[:logger]
+    @timeout_seconds = options[:timeout_seconds]
   end
 
   def logger
@@ -86,6 +98,7 @@ class Princely
   # it down the pipe using Rails.
   #
   def pdf_from_string(string, output_file = '-')
+    puts Process.pid
     path = self.exe_path()
     # Don't spew errors to the standard out...and set up to take IO
     # as input and output
@@ -97,13 +110,15 @@ class Princely
     logger.info ''
 
     # Actually call the prince command, and pass the entire data stream back.
-    pdf = IO.popen(path, "w+")
-    pdf.puts(string)
-    pdf.close_write
-    result = pdf.gets(nil)
-    pdf.close_read
-    result.force_encoding('BINARY') if RUBY_VERSION >= "1.9"
-    return result
+    with_timeout do
+      pdf = IO.popen(path, "w+")
+      pdf.puts(string)
+      pdf.close_write
+      result = pdf.gets(nil)
+      pdf.close_read
+      result.force_encoding('BINARY') if RUBY_VERSION >= "1.9"
+      return result      
+    end
   end
 
   def pdf_from_string_to_file(string, output_file)
@@ -118,10 +133,52 @@ class Princely
     logger.info ''
 
     # Actually call the prince command, and pass the entire data stream back.
-    pdf = IO.popen(path, "w+")
-    pdf.puts(string)
-    pdf.close
+    with_timeout do 
+      pdf = IO.popen(path, "w+")
+      pdf.puts(string)
+      pdf.close
+    end
   end
+
+  private
+
+  def with_timeout(&block)
+    Timeout::timeout(@timeout_seconds) do
+      block.call
+    end
+  rescue Timeout::Error => e
+    puts 'timeout!'
+    get_children(Process.pid).each do |pid|
+      logger.info "killin #{pid}"
+      begin
+        Process.kill('KILL', pid)
+      rescue Errno::ESRCH => e
+        # just trap the error
+      end
+    end
+  end
+
+  def get_children(parent_pid)
+    child_pids = Array.new
+    ps_axu.each_pair do |pid, chunks|
+      child_pids << chunks[IDX_MAP[:pid]].to_i if chunks[IDX_MAP[:ppid]].to_i == parent_pid.to_i
+    end
+    grand_children = child_pids.map{|pid| get_children(pid)}.flatten
+    child_pids.concat grand_children 
+  end
+
+  def ps_axu
+    # BSD style ps invocation
+    lines = `ps axo pid,ppid,pcpu,rss,etime`.split("\n")
+
+    lines.inject(Hash.new) do |mem, line|
+      chunks = line.split(/\s+/)
+      chunks.delete_if {|c| c.strip.empty? }
+      pid = chunks[IDX_MAP[:pid]].strip.to_i
+      mem[pid] = chunks
+      mem
+    end
+  end  
 
   class StdoutLogger
     def self.info(msg)
