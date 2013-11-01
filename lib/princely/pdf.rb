@@ -1,20 +1,18 @@
 module Princely
   class Pdf
-    attr_accessor :exe_path, :style_sheets, :logger, :log_file, :server_flag
+    attr_accessor :executable, :style_sheets, :logger, :log_file, :server_flag
 
     # Initialize method
     #
     def initialize(options={})
       options = {
-        :path => Princely.executable,
+        :path => nil,
+        :executable => Princely.executable,
         :log_file => nil,
         :logger => nil,
         :server_flag => true
       }.merge(options)
-      # Finds where the application lives, so we can call it.
-      @exe_path = options[:path]
-      raise "Cannot find prince command-line app in $PATH" if !@exe_path || @exe_path.length == 0
-      raise "Cannot find prince command-line app at #{@exe_path}" unless File.executable?(@exe_path)
+      @executable = options[:path] ? Princely::Executable.new(options[:path]) : options[:executable]
       @style_sheets = ''
       @log_file = options[:log_file]
       @logger = options[:logger]
@@ -42,12 +40,16 @@ module Princely
     # we've set based on our variables.
     #
     def exe_path
-      # Add any standard cmd line arguments we need to pass
-      @exe_path << " --input=html "
-      @exe_path << "--server " if @server_flag
-      @exe_path << "--log=#{log_file} "
-      @exe_path << @style_sheets
-      @exe_path
+      @executable.join(executable_options)
+    end
+
+    def executable_options
+      options = []
+      options << "--input=html"
+      options << "--server" if @server_flag
+      options << "--log=#{log_file}"
+      options << @style_sheets
+      options
     end
 
     # Makes a pdf from a passed in string.

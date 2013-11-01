@@ -22,14 +22,11 @@ module Princely
   autoload :AssetSupport, 'princely/asset_support'
   autoload :Pdf,          'princely/pdf'
   autoload :Logging,      'princely/logging'
+  autoload :Executable,   'princely/executable'
 
   class << self
     def executable
-      @custom_executable || if ruby_platform =~ /mswin32|minigw32/
-        "C:/Program Files/Prince/Engine/bin/prince"
-      else
-        `which prince`.chomp
-      end
+      @custom_executable || Princely::Executable.new
     end
 
     def executable=(custom_executable)
@@ -39,8 +36,6 @@ module Princely
     def root
       Pathname.new(File.expand_path('../', __FILE__))
     end
-
-  protected
 
     def ruby_platform
       RUBY_PLATFORM
