@@ -53,7 +53,7 @@ describe Princely::Pdf do
   end
 
   describe "exe_path" do
-    let(:prince) { Princely::Pdf.new(path: '/tmp/fake') }
+    let(:prince) { Princely::Pdf.new(:path => '/tmp/fake') }
 
     before(:each) do
       prince.stub(:log_file).and_return('/tmp/test_log')
