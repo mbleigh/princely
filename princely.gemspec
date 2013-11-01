@@ -25,6 +25,8 @@ Gem::Specification.new do |s|
   s.rubygems_version = "1.8.11"
   s.summary = "A simple Rails wrapper for the PrinceXML PDF generation library."
 
+  s.license = 'MIT'
+
   s.add_development_dependency('rspec')
   s.add_development_dependency('rake')
 end
