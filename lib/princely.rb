@@ -15,6 +15,7 @@
 #   )
 #
 require 'logger'
+require 'pathname'
 require 'princely/rails' if defined?(Rails)
 
 module Princely
