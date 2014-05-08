@@ -67,5 +67,11 @@ describe Princely::Pdf do
       prince.style_sheets = " -s test.css "
       prince.exe_path.should == "/tmp/fake --input=html --server --log=/tmp/test_log  -s test.css "
     end
+
+    it "adds the media type" do
+      prince = Princely::Pdf.new(:path => '/tmp/fake', :media => "print_special")
+      prince.stub(:log_file).and_return('/tmp/test_log')
+      prince.exe_path.should == "/tmp/fake --input=html --server --log=/tmp/test_log --media=print_special "
+    end
   end
 end
