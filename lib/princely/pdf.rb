@@ -81,6 +81,7 @@ module Princely
       path = exe_path
       # Don't spew errors to the standard out...and set up to take IO
       # as input and output
+      path << " --media=#{media}" if media
       path << " --silent - -o #{output_file}"
       path << " >> '#{log_file}' 2>> '#{log_file}'" if options[:output_to_log_file]
 
