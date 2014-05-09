@@ -1,6 +1,6 @@
 module Princely
   class Pdf
-    attr_accessor :executable, :style_sheets, :logger, :log_file, :server_flag
+    attr_accessor :executable, :style_sheets, :logger, :log_file, :server_flag, :media
 
     # Initialize method
     #
@@ -10,13 +10,15 @@ module Princely
         :executable => Princely.executable,
         :log_file => nil,
         :logger => nil,
-        :server_flag => true
+        :server_flag => true,
+        :media => nil
       }.merge(options)
       @executable = options[:path] ? Princely::Executable.new(options[:path]) : options[:executable]
       @style_sheets = ''
       @log_file = options[:log_file]
       @logger = options[:logger]
       @server_flag = options[:server_flag]
+      @media = options[:media]
     end
 
     # Returns the instance logger or Princely default logger
@@ -48,6 +50,7 @@ module Princely
       options << "--input=html"
       options << "--server" if @server_flag
       options << "--log=#{log_file}"
+      options << "--media=#{media}" if media
       options << @style_sheets
       options
     end
@@ -78,6 +81,7 @@ module Princely
       path = exe_path
       # Don't spew errors to the standard out...and set up to take IO
       # as input and output
+      path << " --media=#{media}" if media
       path << " --silent - -o #{output_file}"
       path << " >> '#{log_file}' 2>> '#{log_file}'" if options[:output_to_log_file]
 
