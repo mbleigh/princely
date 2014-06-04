@@ -73,5 +73,11 @@ describe Princely::Pdf do
       prince.stub(:log_file).and_return('/tmp/test_log')
       prince.exe_path.should == "/tmp/fake --input=html --server --log=/tmp/test_log --media=print_special "
     end
+
+    it "adds the javascript flag" do
+      prince = Princely::Pdf.new(:path => '/tmp/fake', :javascript_flag => true)
+      prince.stub(:log_file).and_return('/tmp/test_log')
+      prince.exe_path.should == "/tmp/fake --input=html --server --log=/tmp/test_log --javascript "
+    end
   end
 end

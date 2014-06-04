@@ -38,12 +38,13 @@ end
 
 The defaults for the render options are as follows:
 
-    layout:         false
-    template:       the template for the current controller/action
-    stylesheets:    none
-    disposition:    attachment (created PDF file will be sent as download)
-    relative_paths: true
-    server_flag:    true
+    layout:          false
+    template:        the template for the current controller/action
+    stylesheets:     none
+    disposition:     attachment (created PDF file will be sent as download)
+    relative_paths:  true
+    server_flag:     true
+    javascript_flag: false
 
 ## Contributors
 
