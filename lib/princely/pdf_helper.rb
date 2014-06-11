@@ -26,10 +26,11 @@ module Princely
         :template => File.join(controller_path, action_name),
         :relative_paths => true,
         :server_flag => true,
-        :media => nil
+        :media => nil,
+        :javascript_flag => false
       }.merge(options)
 
-      prince = Princely::Pdf.new(options.slice(:server_flag, :media))
+      prince = Princely::Pdf.new(options.slice(:server_flag, :javascript_flag, :media))
       # Sets style sheets on PDF renderer
       prince.add_style_sheets(*options[:stylesheets].collect{|style| asset_file_path(style)})
 
