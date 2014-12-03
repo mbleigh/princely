@@ -1,9 +1,10 @@
 module Princely
   module AssetSupport
     def localize_html_string(html_string, asset_path = nil)
+      html_string = html_string.to_str
       # Make all paths relative, on disk paths...
       html_string.gsub!(".com:/",".com/") # strip out bad attachment_fu URLs
-      html_string.to_str.gsub!( /src=["']+([^:]+?)["']/i ) do |m|
+      html_string.gsub!( /src=["']+([^:]+?)["']/i ) do |m|
         asset_src = asset_path ? "#{asset_path}/#{$1}" : asset_file_path($1)
         %Q{src="#{asset_src}"} # re-route absolute paths
       end
