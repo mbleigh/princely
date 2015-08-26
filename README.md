@@ -48,6 +48,7 @@ The defaults for the render options are as follows:
 
 ## Contributors
 
+* Maintainer: Jared Fraser ([modsognir](https://github.com/modsognir))
 * Gemification and more: Nic Williams
 * [Other Contributors](https://github.com/mbleigh/princely/contributors)
 
