@@ -1,6 +1,8 @@
+require 'timeout'
+
 module Princely
   class Pdf
-    attr_accessor :executable, :style_sheets, :logger, :log_file, :server_flag, :media, :javascript_flag
+    attr_accessor :executable, :style_sheets, :logger, :log_file, :server_flag, :media, :javascript_flag, :timeout
 
     # Initialize method
     #
@@ -21,6 +23,7 @@ module Princely
       @server_flag = options[:server_flag]
       @media = options[:media]
       @javascript_flag = options[:javascript_flag]
+      @timeout = options[:timeout]
     end
 
     # Returns the instance logger or Princely default logger
@@ -64,21 +67,34 @@ module Princely
     # it down the pipe using Rails.
     #
     def pdf_from_string(string, output_file = '-')
-      pdf = initialize_pdf_from_string(string, output_file, {:output_to_log_file => false})
-      pdf.close_write
-      result = pdf.gets(nil)
-      pdf.close_read
-      result.force_encoding('BINARY') if RUBY_VERSION >= "1.9"
+      with_timeout do
+        pdf = initialize_pdf_from_string(string, output_file, {:output_to_log_file => false})
+        pdf.close_write
+        result = pdf.gets(nil)
+        pdf.close_read
+        result.force_encoding('BINARY') if RUBY_VERSION >= "1.9"
 
-      result
+        result
+      end
     end
 
     def pdf_from_string_to_file(string, output_file)
-      pdf = initialize_pdf_from_string(string, output_file)
-      pdf.close
+      with_timeout do
+        pdf = initialize_pdf_from_string(string, output_file)
+        pdf.close
+      end
     end
 
-    protected
+  protected
+
+    def with_timeout(&block)
+      if timeout
+        Timeout.timeout(timeout, &block)
+      else
+        block.call
+      end
+    end
+
     def initialize_pdf_from_string(string, output_file, options = {})
       options = {:log_command => true, :output_to_log_file => true}.merge(options)
       path = exe_path

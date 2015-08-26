@@ -45,6 +45,7 @@ The defaults for the render options are as follows:
     relative_paths:  true
     server_flag:     true
     javascript_flag: false
+    timeout:         none
 
 ## Contributors
 
