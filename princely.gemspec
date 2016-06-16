@@ -5,7 +5,7 @@ Gem::Specification.new do |s|
   s.name = "princely"
   s.version = Princely::Version.to_s
   s.authors = ["Michael Bleigh", "Jared Fraser"]
-  s.date = "2013-05-04"
+  s.date = "2016-06-16"
   s.description = "A wrapper for the PrinceXML PDF generation library."
   s.summary = "A simple Rails wrapper for the PrinceXML PDF generation library."
   s.email = %w[michael@intridea.com dev@jsf.io]

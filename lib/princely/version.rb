@@ -2,7 +2,7 @@ module Princely
   class Version
     class << self
       def version
-        '2.0.0'
+        '2.0.2'
       end
 
       def to_s
