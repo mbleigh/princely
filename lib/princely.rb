@@ -1,7 +1,8 @@
 # PrinceXML Ruby interface.
 # http://www.princexml.com
 #
-# Library by Subimage Interactive - http://www.subimage.com
+# Original code by Seth @ Subimage LLC 
+# - http://subimage.com/blog/2007/05/29/html-css-to-pdf-using-ruby-on-rails/
 #
 #
 # USAGE
