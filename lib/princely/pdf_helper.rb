@@ -3,9 +3,9 @@ require 'princely/asset_support'
 
 module Princely
   module PdfHelper
-
     def self.included(base)
-      base.send :alias_method_chain, :render, :princely
+      base.send :alias_method, :render_without_princely, :render
+      base.send :alias_method, :render, :render_with_princely
     end
 
     def render_with_princely(options = nil, *args, &block)
