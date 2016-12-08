@@ -1,6 +1,11 @@
 language: ruby
+before_install:
+  - gem install bundler
 install:
   - bundle install
+before_script:
+  - wget https://www.princexml.com/download/prince_11-1_ubuntu12.04_amd64.deb
+  - sudo dpkg -i prince_11-1_ubuntu12.04_amd64.deb
 script:
   - bundle exec rspec spec
 rvm:
