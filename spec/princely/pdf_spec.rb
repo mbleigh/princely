@@ -8,8 +8,6 @@ describe Princely::Pdf do
   end
 
   it "generates a PDF from HTML" do
-    pending 'does not work with travis'
-
     pdf = Princely::Pdf.new.pdf_from_string html_doc
     pdf.should start_with("%PDF-1.4")
     pdf.rstrip.should end_with("%%EOF")
