@@ -1,19 +1,12 @@
-require 'spec_helper'
+ENV['RAILS_ENV'] = 'production'
+require 'rails_helper'
 
 module Princely
   describe AssetSupport do
     let(:dummy_class) { Class.new { include AssetSupport } }
 
-    before(:context) do
-      ENV['RAILS_ENV'] = 'production'
-      load 'dummy/config/environment.rb'
-    end
-
     after(:context) do
       ENV['RAILS_ENV'] = nil
-      if Object.constants.include? :Rails
-        Object.send(:remove_const, :Rails)
-      end
     end
 
     specify "sprockets-rails behavior for production enviroment" do
