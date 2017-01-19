@@ -4,7 +4,7 @@ module Princely
   describe Executable do
     context 'without executable checks' do
       before do
-        Princely::Executable.any_instance.stub(:check_for_executable)
+        allow_any_instance_of(Princely::Executable).to receive(:check_for_executable)
       end
 
       describe '#join' do
@@ -22,12 +22,12 @@ module Princely
 
       describe "executable_path" do
         it "returns a path for windows" do
-          Princely.stub(:ruby_platform).and_return('mswin32')
+          allow(Princely).to receive(:ruby_platform).and_return('mswin32')
           expect(Princely::Executable.new.path).to eql("C:/Program Files/Prince/Engine/bin/prince")
         end
 
         it "returns a path for OS X" do
-          Princely.stub(:ruby_platform).and_return('x86_64-darwin12.0.0')
+          allow(Princely).to receive(:ruby_platform).and_return('x86_64-darwin12.0.0')
           expect(Princely::Executable.new.path).to eql(`which prince`.chomp)
         end
       end
@@ -35,11 +35,11 @@ module Princely
 
     describe "check_for_executable" do
       it "raises an error if path does not exist" do
-        expect { Princely::Executable.new("/some/fake/path") }.to raise_error
+        expect { Princely::Executable.new("/some/fake/path") }.to raise_error(RuntimeError)
       end
 
       it "raises an error if blank" do
-        expect { Princely::Executable.new("") }.to raise_error
+        expect { Princely::Executable.new("") }.to raise_error(RuntimeError)
       end
     end
 
