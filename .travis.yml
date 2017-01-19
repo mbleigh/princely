@@ -11,5 +11,6 @@ rvm:
   - ruby-head
 sudo: required  
 before_install:
+  - gem install bundler
   - wget http://www.princexml.com/download/prince_20161028-1_ubuntu12.04_amd64.deb
   - sudo dpkg -i prince_20161028-1_ubuntu12.04_amd64.deb
