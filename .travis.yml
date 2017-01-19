@@ -11,6 +11,5 @@ rvm:
   - ruby-head
 sudo: required  
 before_install:
-  - wget http://www.princexml.com/download/prince_20161028-1_ubuntu14.04_amd64.deb
-  - sudo apt-get install -y libcairo2 libfontconfig1 libtiff5
-  - sudo dpkg -i prince_20161028-1_ubuntu14.04_amd64.deb
+  - wget http://www.princexml.com/download/prince_20161028-1_ubuntu12.04_i386.deb
+  - sudo dpkg -i prince_20161028-1_ubuntu12.04_i386.deb
