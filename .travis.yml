@@ -9,3 +9,6 @@ rvm:
   - 2.0.0
   - 1.9.3
   - ruby-head
+before_install:
+  - wget http://www.princexml.com/download/prince-20161219-linux-generic-x86_64.tar.gz
+  - sudo dpkg -i prince-20161219-linux-generic-x86_64.tar.gz
