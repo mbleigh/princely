@@ -72,7 +72,7 @@ module Princely
         pdf.close_write
         result = pdf.gets(nil)
         pdf.close_read
-        result.force_encoding('BINARY') if RUBY_VERSION >= "1.9"
+        result && result.force_encoding('BINARY') if RUBY_VERSION >= "1.9"
 
         result
       end
