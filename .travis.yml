@@ -9,3 +9,6 @@ rvm:
   - 2.0.0
   - 1.9.3
   - ruby-head
+before_install:
+  - wget http://www.princexml.com/download/prince_20160929-1_debian7.4_amd64.deb
+  - sudo dpkg -i prince_20160929-1_debian7.4_amd64.deb
