@@ -5,7 +5,28 @@ module Princely
   module PdfHelper
 
     def self.included(base)
-      base.send :alias_method_chain, :render, :princely
+      # Protect from trying to augment modules that appear
+      # as the result of adding other gems.
+      return if base != ActionController::Base
+      
+      base.class_eval do
+        alias_method_chain :render, :princely
+      end
+    end
+
+    def self.prepended(base)
+      # Protect from trying to augment modules that appear
+      # as the result of adding other gems.
+      return if base != ActionController::Base
+
+      base.class_eval do
+        alias_method :render_without_princely, :render
+      end
+
+      def render(options = nil, *args, &block)
+          render_with_princely(options, *args, &block)
+      end
+
     end
 
     def render_with_princely(options = nil, *args, &block)

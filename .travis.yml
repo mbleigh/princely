@@ -4,7 +4,13 @@ install:
 script:
   - bundle exec rspec spec
 rvm:
+  - 2.2.3
   - 2.1.0
   - 2.0.0
   - 1.9.3
   - ruby-head
+sudo: required  
+before_install:
+  - gem install bundler
+  - wget http://www.princexml.com/download/prince_20161028-1_ubuntu12.04_amd64.deb
+  - sudo dpkg -i prince_20161028-1_ubuntu12.04_amd64.deb
