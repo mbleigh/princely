@@ -34,7 +34,7 @@ module Princely
       # Sets style sheets on PDF renderer
       prince.add_style_sheets(*options[:stylesheets].collect{|style| asset_file_path(style)})
 
-      html_string = render_to_string(options.slice(:template, :layout, :handlers, :formats))
+      html_string = render_to_string(options.slice(:template, :layout, :handlers, :formats, :locals))
 
       html_string = localize_html_string(html_string, Rails.public_path) if options[:relative_paths]
 

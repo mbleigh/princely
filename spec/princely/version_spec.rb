@@ -4,10 +4,10 @@ require 'princely/version'
 describe Princely::Version do
   let(:version) { '9.9.9' }
   before {
-    Princely::Version.stub(:version).and_return(version)
+    allow(Princely::Version).to receive(:version).and_return(version)
   }
 
   it "prints the version" do
-    Princely::Version.to_s.should == version
+    expect(Princely::Version.to_s).to eql(version)
   end
 end

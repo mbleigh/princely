@@ -20,6 +20,7 @@ class Provider::EstimatesController < Provider::BaseController
                :formats => %w[pdf],
                :stylesheets => %w[application prince],
                :layout => 'pdf',
+               :locals => { :foo => 'bar' },
                :disposition => 'inline', # PDF will be sent inline, means you can load it inside an iFrame or Embed
                :relative_paths => true # Modify asset paths to make them relative. See [the AssetSupport module](/lib/princely/asset_support.rb)
       end
@@ -40,6 +41,7 @@ The defaults for the render options are as follows:
 
     layout:          false
     template:        the template for the current controller/action
+    locals:          none
     stylesheets:     none
     disposition:     attachment (created PDF file will be sent as download)
     relative_paths:  true
@@ -51,6 +53,7 @@ The defaults for the render options are as follows:
 
 * Maintainer: Jared Fraser ([modsognir](https://github.com/modsognir))
 * Gemification and more: Nic Williams
+* Based on code by: Seth B ([subimage](https://github.com/subimage))
 * [Other Contributors](https://github.com/mbleigh/princely/contributors)
 
 ## Resources
