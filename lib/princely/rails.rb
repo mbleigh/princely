@@ -7,6 +7,7 @@ end
 if defined?(Rails)
   if Rails::VERSION::MAJOR >= 5
     ActionController::Base.send(:prepend, Princely::PdfHelper)
+    ActionController::Base.send(:include, Princely::AssetSupport)
   else
     ActionController::Base.send(:include, Princely::PdfHelper)
   end
