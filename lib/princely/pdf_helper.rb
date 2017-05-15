@@ -8,7 +8,7 @@ module Princely
       base.send :alias_method, :render, :render_with_princely
     end
 
-    def self.included(base)
+    def self.prepended(base)
       base.send :alias_method, :render_without_princely, :render
       base.send :alias_method, :render, :render_with_princely
     end
