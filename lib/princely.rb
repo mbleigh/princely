@@ -86,7 +86,7 @@ class Princely
   #
   def exe_path
     # Add any standard cmd line arguments we need to pass
-    @exe_path << " --input=html --server --log=#{log_file} "
+    @exe_path << " --input=html --server --log='#{log_file}' "
     @exe_path << @cmd_args
     @exe_path << @style_sheets
     return @exe_path
@@ -117,7 +117,7 @@ class Princely
       result = pdf.gets(nil)
       pdf.close_read
       result.force_encoding('BINARY') if RUBY_VERSION >= "1.9"
-      return result      
+      return result
     end
   end
 
@@ -133,7 +133,7 @@ class Princely
     logger.info ''
 
     # Actually call the prince command, and pass the entire data stream back.
-    with_timeout do 
+    with_timeout do
       pdf = IO.popen(path, "w+")
       pdf.puts(string)
       pdf.close
@@ -166,7 +166,7 @@ class Princely
       child_pids << chunks[IDX_MAP[:pid]].to_i if chunks[IDX_MAP[:ppid]].to_i == parent_pid.to_i
     end
     grand_children = child_pids.map{|pid| get_children(pid)}.flatten
-    child_pids.concat grand_children 
+    child_pids.concat grand_children
   end
 
   def ps_axu
@@ -180,7 +180,7 @@ class Princely
       mem[pid] = chunks
       mem
     end
-  end  
+  end
 
   class StdoutLogger
     def self.info(msg)
