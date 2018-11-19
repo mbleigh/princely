@@ -54,11 +54,12 @@ module Princely
 
     def make_and_send_pdf(pdf_name, options = {})
       options = { :disposition => 'attachment' }.merge(options)
+      file_name = "#{pdf_name}.pdf"
       send_data(
         make_pdf(options),
-        :filename => "#{pdf_name}.pdf",
-        :type => 'application/pdf; charset=utf-8',
-        :disposition => options[:disposition]
+        filename: ERB::Util.url_encode(file_name),
+        type: 'application/pdf',
+        disposition: "#{options[:disposition]}; filename*= UTF-8''#{ERB::Util.url_encode(file_name)}"
       )
     end
   end
