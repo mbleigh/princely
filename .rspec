@@ -1,2 +1,3 @@
 --color
 --format progress
+--exclude-pattern dummy/**/*_spec.rb

@@ -16,8 +16,9 @@ module Princely
 
     def asset_file_path(asset)
       # Remove /assets/ from generated names and try and find a matching asset
-      Rails.application.assets ||= Sprockets::Environment.new
-      Rails.application.assets.find_asset(asset.gsub(%r{/assets/}, "")).try(:pathname) || asset
+      assets = Rails.application.assets ||
+        ::Sprockets::Railtie.build_environment(Rails.application)
+      assets.find_asset(asset.gsub(%r{/assets/}, '')).try(:pathname) || asset
     end
   end
 end
