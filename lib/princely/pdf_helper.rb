@@ -53,11 +53,11 @@ module Princely
     alias_method :stylesheet_file_path, :asset_file_path
 
     def make_and_send_pdf(pdf_name, options = {})
-      options = {:disposition => 'attachment'}.merge(options)
+      options = { :disposition => 'attachment' }.merge(options)
       send_data(
         make_pdf(options),
         :filename => "#{pdf_name}.pdf",
-        :type => 'application/pdf',
+        :type => 'application/pdf; charset=utf-8',
         :disposition => options[:disposition]
       )
     end
