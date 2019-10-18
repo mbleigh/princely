@@ -48,6 +48,7 @@ The defaults for the render options are as follows:
     server_flag:     true
     javascript_flag: false
     timeout:         none
+    exe_options:     none
 
 ## Contributors
 

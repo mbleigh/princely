@@ -14,7 +14,8 @@ module Princely
         :logger => nil,
         :server_flag => true,
         :media => nil,
-        :javascript_flag => false
+        :javascript_flag => false,
+        :exe_options => []
       }.merge(options)
       @executable = options[:path] ? Princely::Executable.new(options[:path]) : options[:executable]
       @style_sheets = ''
@@ -24,6 +25,7 @@ module Princely
       @media = options[:media]
       @javascript_flag = options[:javascript_flag]
       @timeout = options[:timeout]
+      @custom_exe_options = options[:exe_options]
     end
 
     # Returns the instance logger or Princely default logger
@@ -58,6 +60,7 @@ module Princely
       options << "--media=#{media}" if media
       options << "--javascript" if @javascript_flag
       options << @style_sheets
+      options += @custom_exe_options
       options
     end
 
