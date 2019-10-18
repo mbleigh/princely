@@ -51,6 +51,17 @@ describe Princely::Pdf do
     end
   end
 
+  describe "exe_options with array" do
+    before(:each) do
+      allow(prince).to receive(:log_file).and_return('/tmp/test_log')
+    end
+
+    let(:prince) { Princely::Pdf.new(:exe_options => ['--xml-external-entities']) }
+    it 'adds them to the other options' do
+      expect(prince.executable_options).to include('--xml-external-entities')
+    end
+  end
+
   describe "exe_path" do
     let(:prince) { Princely::Pdf.new(:path => '/tmp/fake') }
 
