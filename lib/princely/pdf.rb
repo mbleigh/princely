@@ -106,8 +106,11 @@ module Princely
 
       log_command path if options[:log_command]
 
+      # Make sure the log file exists before the pipe creation.
+      FileUtils.touch log_file
+
       # Actually call the prince command, and pass the entire data stream back.
-      pdf = IO.popen(path, "w+")
+      pdf = IO.popen(path, "w+", err: log_file.to_s)
       pdf.puts string
       pdf
     end
