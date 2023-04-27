@@ -2,7 +2,7 @@ require 'timeout'
 
 module Princely
   class Pdf
-    attr_accessor :executable, :style_sheets, :logger, :log_file, :server_flag, :media, :javascript_flag, :timeout
+    attr_accessor :executable, :style_sheets, :logger, :log_file, :server_flag, :media, :javascript_flag, :timeout, :pdf_forms_flag
 
     # Initialize method
     #
@@ -14,7 +14,8 @@ module Princely
         :logger => nil,
         :server_flag => true,
         :media => nil,
-        :javascript_flag => false
+        :javascript_flag => false,
+        :pdf_forms_flag => false,
       }.merge(options)
       @executable = options[:path] ? Princely::Executable.new(options[:path]) : options[:executable]
       @style_sheets = ''
@@ -23,6 +24,7 @@ module Princely
       @server_flag = options[:server_flag]
       @media = options[:media]
       @javascript_flag = options[:javascript_flag]
+      @pdf_forms_flag = options[:pdf_forms_flag]
       @timeout = options[:timeout]
     end
 
@@ -57,6 +59,7 @@ module Princely
       options << "--log=#{log_file}"
       options << "--media=#{media}" if media
       options << "--javascript" if @javascript_flag
+      options << "--pdf-forms" if @pdf_forms_flag
       options << @style_sheets
       options
     end
