@@ -9,7 +9,7 @@ describe Princely::Pdf do
 
   it "generates a PDF from HTML" do
     pdf = Princely::Pdf.new.pdf_from_string html_doc
-    expect(pdf).to start_with("%PDF-1.4")
+    expect(pdf).to match(/\A%PDF-\d\.\d/)
     expect(pdf.rstrip).to end_with("%%EOF")
     pdf.length > 100
   end
@@ -77,6 +77,12 @@ describe Princely::Pdf do
       prince = Princely::Pdf.new(:path => '/tmp/fake', :javascript_flag => true)
       allow(prince).to receive(:log_file).and_return('/tmp/test_log')
       expect(prince.exe_path).to eql("/tmp/fake --input=html --server --log=/tmp/test_log --javascript ")
+    end
+
+    it "adds the pdf-forms flag" do
+      prince = Princely::Pdf.new(:path => '/tmp/fake', :pdf_forms_flag => true)
+      allow(prince).to receive(:log_file).and_return('/tmp/test_log')
+      expect(prince.exe_path).to eql("/tmp/fake --input=html --server --log=/tmp/test_log --pdf-forms ")
     end
   end
 end
