@@ -17,7 +17,7 @@
 #
 require 'logger'
 require 'pathname'
-require 'princely/rails' if defined?(Rails)
+require 'princely/railtie' if defined?(Rails)
 
 module Princely
   autoload :StdoutLogger, 'princely/stdout_logger'
